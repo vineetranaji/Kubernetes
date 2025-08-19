@@ -85,4 +85,4 @@ kubectl run tmp-shell --rm -i --tty --image busybox -- /bin/sh
 ```
 
 ---
-✅ Keep this handy while working with Kubernetes!
+✅ Keep this handy while working with Kubernetes! And feel free to add more!
