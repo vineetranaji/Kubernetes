@@ -1,3 +1,4 @@
+# MongoDB Deployment and Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     app: mongodb
 spec:
-  replicas: 1
+  replicas: 1 # Single MongoDB pod
   selector:
     matchLabels:
       app: mongodb
@@ -16,20 +17,20 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: mongo
+        image: mongo # Official MongoDB image
         ports:
-        - containerPort: 27017
+        - containerPort: 27017 # MongoDB port
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-root-username
+              key: mongo-root-username # Get username from secret
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom: 
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-root-password
+              key: mongo-root-password # Get password from secret
 ---
 apiVersion: v1
 kind: Service
@@ -37,8 +38,8 @@ metadata:
   name: mongodb-service
 spec:
   selector:
-    app: mongodb
+    app: mongodb # Targets pods with label app: mongodb
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 27017 # Service port
+      targetPort: 27017 # Container port

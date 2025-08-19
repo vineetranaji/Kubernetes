@@ -1,6 +1,7 @@
+# ConfigMap for MongoDB connection
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mongodb-configmap
 data:
-  database_url: mongodb-service
+  database_url: mongodb-service # MongoDB service name

@@ -1,3 +1,4 @@
+# NGINX Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 2
+  replicas: 2 # Number of NGINX pods to run
   selector:
     matchLabels:
       app: nginx
@@ -16,6 +17,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.16
+        image: nginx:1.16 # NGINX image version
         ports:
-        - containerPort: 8080
+        - containerPort: 8080 # Container port to expose

@@ -1,3 +1,4 @@
+# Mongo Express Deployment and Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     app: mongo-express
 spec:
-  replicas: 1
+  replicas: 1 # Single Mongo Express pod
   selector:
     matchLabels:
       app: mongo-express
@@ -16,25 +17,25 @@ spec:
     spec:
       containers:
       - name: mongo-express
-        image: mongo-express
+        image: mongo-express # Official Mongo Express image
         ports:
-        - containerPort: 8081
+        - containerPort: 8081 # Mongo Express port
         env:
         - name: ME_CONFIG_MONGODB_ADMINUSERNAME
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-root-username
+              key: mongo-root-username # Get username from secret
         - name: ME_CONFIG_MONGODB_ADMINPASSWORD
           valueFrom: 
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-root-password
+              key: mongo-root-password # Get password from secret
         - name: ME_CONFIG_MONGODB_SERVER
           valueFrom: 
             configMapKeyRef:
               name: mongodb-configmap
-              key: database_url
+              key: database_url # Get DB URL from configmap
 ---
 apiVersion: v1
 kind: Service
@@ -42,10 +43,10 @@ metadata:
   name: mongo-express-service
 spec:
   selector:
-    app: mongo-express
+    app: mongo-express # Targets pods with label app: mongo-express
   type: LoadBalancer  
   ports:
     - protocol: TCP
-      port: 8081
-      targetPort: 8081
-      nodePort: 30000
+      port: 8081 # Service port
+      targetPort: 8081 # Container port
+      nodePort: 30000 # Node port for external access

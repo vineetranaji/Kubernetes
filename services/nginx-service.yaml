@@ -1,11 +1,12 @@
+# NGINX Service
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
 spec:
   selector:
-    app: nginx
+    app: nginx # Targets pods with label app: nginx
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 80 # Service port
+      targetPort: 8080 # Container port
