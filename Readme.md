@@ -43,3 +43,6 @@ This project contains Kubernetes manifests to deploy an NGINX web server, a Mong
 
 - MongoDB credentials are stored as base64-encoded secrets.
 - Mongo Express connects to MongoDB using the provided ConfigMap and secrets.
+
+##
+Helm charts
