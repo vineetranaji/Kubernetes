@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "nginx-working-app.fullname" . }}-test"
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: nginx
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "nginx-working-app.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

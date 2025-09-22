@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "load-balancer.fullname" . }}
+  labels:
+    {{- include "load-balancer.labels" . | nindent 4 }}
+  #annotations:
+    # force NLB (Network LB) on AWS LB or ALB
+    #service.beta.kubernetes.io/aws-load-balancer-type: "nlb" 
+spec:
+  type: LoadBalancer
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+  selector:
+    app: my-nginx

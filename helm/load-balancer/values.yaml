@@ -1,0 +1,14 @@
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 80
+
+serviceAccount:
+  create: false
+  name: ""
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
